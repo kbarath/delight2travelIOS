@@ -1,0 +1,650 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		B1010001 /* Delight2TravelApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020001 /* Delight2TravelApp.swift */; };
+		B1010002 /* RootView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020002 /* RootView.swift */; };
+		B1010003 /* TripRequest.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020003 /* TripRequest.swift */; };
+		B1010004 /* TravelDocumentsResponse.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020004 /* TravelDocumentsResponse.swift */; };
+		B1010005 /* Colors.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020005 /* Colors.swift */; };
+		B1010006 /* Typography.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020006 /* Typography.swift */; };
+		B1010007 /* CardView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020007 /* CardView.swift */; };
+		B1010008 /* PrimaryButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020008 /* PrimaryButton.swift */; };
+		B1010009 /* GradientBackground.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020009 /* GradientBackground.swift */; };
+		B1010010 /* APIError.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020010 /* APIError.swift */; };
+		B1010011 /* Configuration.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020011 /* Configuration.swift */; };
+		B1010012 /* APIEndpoint.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020012 /* APIEndpoint.swift */; };
+		B1010013 /* TravelDocumentsAPIClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020013 /* TravelDocumentsAPIClient.swift */; };
+		B1010014 /* TripInputViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020014 /* TripInputViewModel.swift */; };
+		B1010015 /* LabeledTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020015 /* LabeledTextField.swift */; };
+		B1010016 /* TripInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020016 /* TripInputView.swift */; };
+		B1010017 /* ResultsViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020017 /* ResultsViewModel.swift */; };
+		B1010018 /* DocumentsResultsView.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020018 /* DocumentsResultsView.swift */; };
+		B1010020 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = B1020020 /* Assets.xcassets */; };
+		B1010031 /* TripInputViewModelTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020031 /* TripInputViewModelTests.swift */; };
+		B1010032 /* TravelDocumentsAPIClientTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020032 /* TravelDocumentsAPIClientTests.swift */; };
+		B1010033 /* TripRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020033 /* TripRequestTests.swift */; };
+		B1010034 /* TravelDocumentsResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020034 /* TravelDocumentsResponseTests.swift */; };
+		B1010035 /* MockTravelDocumentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020035 /* MockTravelDocumentsAPI.swift */; };
+		B1010041 /* Delight2TravelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020041 /* Delight2TravelUITests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		B1020001 /* Delight2TravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delight2TravelApp.swift; sourceTree = "<group>"; };
+		B1020002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
+		B1020003 /* TripRequest.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequest.swift; sourceTree = "<group>"; };
+		B1020004 /* TravelDocumentsResponse.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDocumentsResponse.swift; sourceTree = "<group>"; };
+		B1020005 /* Colors.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Colors.swift; sourceTree = "<group>"; };
+		B1020006 /* Typography.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Typography.swift; sourceTree = "<group>"; };
+		B1020007 /* CardView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CardView.swift; sourceTree = "<group>"; };
+		B1020008 /* PrimaryButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PrimaryButton.swift; sourceTree = "<group>"; };
+		B1020009 /* GradientBackground.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GradientBackground.swift; sourceTree = "<group>"; };
+		B1020010 /* APIError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIError.swift; sourceTree = "<group>"; };
+		B1020011 /* Configuration.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Configuration.swift; sourceTree = "<group>"; };
+		B1020012 /* APIEndpoint.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIEndpoint.swift; sourceTree = "<group>"; };
+		B1020013 /* TravelDocumentsAPIClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDocumentsAPIClient.swift; sourceTree = "<group>"; };
+		B1020014 /* TripInputViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInputViewModel.swift; sourceTree = "<group>"; };
+		B1020015 /* LabeledTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LabeledTextField.swift; sourceTree = "<group>"; };
+		B1020016 /* TripInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInputView.swift; sourceTree = "<group>"; };
+		B1020017 /* ResultsViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResultsViewModel.swift; sourceTree = "<group>"; };
+		B1020018 /* DocumentsResultsView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DocumentsResultsView.swift; sourceTree = "<group>"; };
+		B1020020 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		B1020021 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
+		B1020031 /* TripInputViewModelTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripInputViewModelTests.swift; sourceTree = "<group>"; };
+		B1020032 /* TravelDocumentsAPIClientTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDocumentsAPIClientTests.swift; sourceTree = "<group>"; };
+		B1020033 /* TripRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequestTests.swift; sourceTree = "<group>"; };
+		B1020034 /* TravelDocumentsResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDocumentsResponseTests.swift; sourceTree = "<group>"; };
+		B1020035 /* MockTravelDocumentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTravelDocumentsAPI.swift; sourceTree = "<group>"; };
+		B1020041 /* Delight2TravelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delight2TravelUITests.swift; sourceTree = "<group>"; };
+		B1030001 /* Delight2Travel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delight2Travel.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1030002 /* Delight2TravelUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Delight2TravelUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+		B1030003 /* Delight2TravelUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Delight2TravelUITests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		B1040001 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1040002 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1040003 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		B1050000 = {
+			isa = PBXGroup;
+			children = (
+				B1050001 /* Delight2Travel */,
+				B1050099 /* Products */,
+				B1050081 /* Delight2TravelUnitTests */,
+				B1050082 /* Delight2TravelUITests */,
+			);
+			sourceTree = "<group>";
+		};
+		B1050001 /* Delight2Travel */ = {
+			isa = PBXGroup;
+			children = (
+				B1050010 /* App */,
+				B1050020 /* Features */,
+				B1050030 /* Core */,
+				B1050040 /* Resources */,
+			);
+			path = Delight2Travel;
+			sourceTree = "<group>";
+		};
+		B1050010 /* App */ = {
+			isa = PBXGroup;
+			children = (
+				B1020001 /* Delight2TravelApp.swift */,
+				B1020002 /* RootView.swift */,
+			);
+			path = App;
+			sourceTree = "<group>";
+		};
+		B1050020 /* Features */ = {
+			isa = PBXGroup;
+			children = (
+				B1050021 /* TripInput */,
+				B1050022 /* Results */,
+			);
+			path = Features;
+			sourceTree = "<group>";
+		};
+		B1050021 /* TripInput */ = {
+			isa = PBXGroup;
+			children = (
+				B1020016 /* TripInputView.swift */,
+				B1020014 /* TripInputViewModel.swift */,
+				B1050021A /* Components */,
+			);
+			path = TripInput;
+			sourceTree = "<group>";
+		};
+		B1050021A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B1020015 /* LabeledTextField.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B1050022 /* Results */ = {
+			isa = PBXGroup;
+			children = (
+				B1020018 /* DocumentsResultsView.swift */,
+				B1020017 /* ResultsViewModel.swift */,
+			);
+			path = Results;
+			sourceTree = "<group>";
+		};
+		B1050030 /* Core */ = {
+			isa = PBXGroup;
+			children = (
+				B1050031 /* API */,
+				B1050032 /* Models */,
+				B1050033 /* Theme */,
+			);
+			path = Core;
+			sourceTree = "<group>";
+		};
+		B1050031 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				B1020013 /* TravelDocumentsAPIClient.swift */,
+				B1020012 /* APIEndpoint.swift */,
+				B1020010 /* APIError.swift */,
+				B1020011 /* Configuration.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		B1050032 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				B1020003 /* TripRequest.swift */,
+				B1020004 /* TravelDocumentsResponse.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		B1050033 /* Theme */ = {
+			isa = PBXGroup;
+			children = (
+				B1020005 /* Colors.swift */,
+				B1020006 /* Typography.swift */,
+				B1050033A /* Components */,
+			);
+			path = Theme;
+			sourceTree = "<group>";
+		};
+		B1050033A /* Components */ = {
+			isa = PBXGroup;
+			children = (
+				B1020007 /* CardView.swift */,
+				B1020008 /* PrimaryButton.swift */,
+				B1020009 /* GradientBackground.swift */,
+			);
+			path = Components;
+			sourceTree = "<group>";
+		};
+		B1050040 /* Resources */ = {
+			isa = PBXGroup;
+			children = (
+				B1020020 /* Assets.xcassets */,
+				B1020021 /* Info.plist */,
+			);
+			path = Resources;
+			sourceTree = "<group>";
+		};
+		B1050081 /* Delight2TravelUnitTests */ = {
+			isa = PBXGroup;
+			children = (
+				B1020031 /* TripInputViewModelTests.swift */,
+				B1020032 /* TravelDocumentsAPIClientTests.swift */,
+				B1020033 /* TripRequestTests.swift */,
+				B1020034 /* TravelDocumentsResponseTests.swift */,
+				B1020035 /* MockTravelDocumentsAPI.swift */,
+			);
+			path = Delight2TravelUnitTests;
+			sourceTree = "<group>";
+		};
+		B1050082 /* Delight2TravelUITests */ = {
+			isa = PBXGroup;
+			children = (
+				B1020041 /* Delight2TravelUITests.swift */,
+			);
+			path = Delight2TravelUITests;
+			sourceTree = "<group>";
+		};
+		B1050099 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				B1030001 /* Delight2Travel.app */,
+				B1030002 /* Delight2TravelUnitTests.xctest */,
+				B1030003 /* Delight2TravelUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		B1060001 /* Delight2Travel */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1070001 /* Build configuration list for PBXNativeTarget "Delight2Travel" */;
+			buildPhases = (
+				B1060011 /* Sources */,
+				B1040001 /* Frameworks */,
+				B1060021 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = Delight2Travel;
+			productName = Delight2Travel;
+			productReference = B1030001 /* Delight2Travel.app */;
+			productType = "com.apple.product-type.application";
+		};
+		B1060002 /* Delight2TravelUnitTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1070002 /* Build configuration list for PBXNativeTarget "Delight2TravelUnitTests" */;
+			buildPhases = (
+				B1060012 /* Sources */,
+				B1040002 /* Frameworks */,
+				B1060022 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1060031 /* PBXTargetDependency */,
+			);
+			name = Delight2TravelUnitTests;
+			productName = Delight2TravelUnitTests;
+			productReference = B1030002 /* Delight2TravelUnitTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		B1060003 /* Delight2TravelUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = B1070003 /* Build configuration list for PBXNativeTarget "Delight2TravelUITests" */;
+			buildPhases = (
+				B1060013 /* Sources */,
+				B1040003 /* Frameworks */,
+				B1060023 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				B1060032 /* PBXTargetDependency */,
+			);
+			name = Delight2TravelUITests;
+			productName = Delight2TravelUITests;
+			productReference = B1030003 /* Delight2TravelUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		B1080001 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+			};
+			buildConfigurationList = B1070000 /* Build configuration list for PBXProject "Delight2Travel" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = B1050000;
+			productRefGroup = B1050099 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				B1060001 /* Delight2Travel */,
+				B1060002 /* Delight2TravelUnitTests */,
+				B1060003 /* Delight2TravelUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		B1060021 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1010020 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1060022 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1060023 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		B1060011 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1010001 /* Delight2TravelApp.swift in Sources */,
+				B1010002 /* RootView.swift in Sources */,
+				B1010003 /* TripRequest.swift in Sources */,
+				B1010004 /* TravelDocumentsResponse.swift in Sources */,
+				B1010005 /* Colors.swift in Sources */,
+				B1010006 /* Typography.swift in Sources */,
+				B1010007 /* CardView.swift in Sources */,
+				B1010008 /* PrimaryButton.swift in Sources */,
+				B1010009 /* GradientBackground.swift in Sources */,
+				B1010010 /* APIError.swift in Sources */,
+				B1010011 /* Configuration.swift in Sources */,
+				B1010012 /* APIEndpoint.swift in Sources */,
+				B1010013 /* TravelDocumentsAPIClient.swift in Sources */,
+				B1010014 /* TripInputViewModel.swift in Sources */,
+				B1010015 /* LabeledTextField.swift in Sources */,
+				B1010016 /* TripInputView.swift in Sources */,
+				B1010017 /* ResultsViewModel.swift in Sources */,
+				B1010018 /* DocumentsResultsView.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1060012 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1010031 /* TripInputViewModelTests.swift in Sources */,
+				B1010032 /* TravelDocumentsAPIClientTests.swift in Sources */,
+				B1010033 /* TripRequestTests.swift in Sources */,
+				B1010034 /* TravelDocumentsResponseTests.swift in Sources */,
+				B1010035 /* MockTravelDocumentsAPI.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		B1060013 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				B1010041 /* Delight2TravelUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		B1060031 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1060001 /* Delight2Travel */;
+			targetProxy = B1060041 /* PBXContainerItemProxy */;
+		};
+		B1060032 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = B1060001 /* Delight2Travel */;
+			targetProxy = B1060042 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin PBXContainerItemProxy section */
+		B1060041 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1080001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1060001;
+			remoteInfo = Delight2Travel;
+		};
+		B1060042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1080001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1060001;
+			remoteInfo = Delight2Travel;
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin XCBuildConfiguration section */
+		B1090001 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		B1090002 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CODE_SIGN_STYLE = Automatic;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		B1090011 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Delight2Travel/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1090012 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "";
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = NO;
+				INFOPLIST_FILE = Delight2Travel/Resources/Info.plist;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		B1090021 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app.unitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Delight2Travel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Delight2Travel";
+			};
+			name = Debug;
+		};
+		B1090022 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app.unitTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/Delight2Travel.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/Delight2Travel";
+			};
+			name = Release;
+		};
+		B1090031 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app.uiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		B1090032 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.delight2travel.app.uiTests;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		B1070000 /* Build configuration list for PBXProject "Delight2Travel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1090001 /* Debug */,
+				B1090002 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1070001 /* Build configuration list for PBXNativeTarget "Delight2Travel" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1090011 /* Debug */,
+				B1090012 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1070002 /* Build configuration list for PBXNativeTarget "Delight2TravelUnitTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1090021 /* Debug */,
+				B1090022 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		B1070003 /* Build configuration list for PBXNativeTarget "Delight2TravelUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				B1090031 /* Debug */,
+				B1090032 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = B1080001 /* Project object */;
+}
