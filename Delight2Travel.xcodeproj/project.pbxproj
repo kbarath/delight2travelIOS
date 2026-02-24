@@ -34,6 +34,37 @@
 		B1010041 /* Delight2TravelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020041 /* Delight2TravelUITests.swift */; };
 /* End PBXBuildFile section */
 
+/* Begin PBXBuildRule section */
+		7AB9AD052F4DFC5900468BBD /* PBXBuildRule */ = {
+			isa = PBXBuildRule;
+			compilerSpec = com.apple.compilers.proxy.script;
+			fileType = pattern.proxy;
+			inputFiles = (
+			);
+			isEditable = 1;
+			outputFiles = (
+			);
+			script = "# Type a script or drag a script file from your workspace to insert its path.\n";
+		};
+/* End PBXBuildRule section */
+
+/* Begin PBXContainerItemProxy section */
+		B1060041 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1080001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1060001;
+			remoteInfo = Delight2Travel;
+		};
+		B1060042 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = B1080001 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = B1060001;
+			remoteInfo = Delight2Travel;
+		};
+/* End PBXContainerItemProxy section */
+
 /* Begin PBXFileReference section */
 		B1020001 /* Delight2TravelApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delight2TravelApp.swift; sourceTree = "<group>"; };
 		B1020002 /* RootView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RootView.swift; sourceTree = "<group>"; };
@@ -258,6 +289,7 @@
 				B1060021 /* Resources */,
 			);
 			buildRules = (
+				7AB9AD052F4DFC5900468BBD /* PBXBuildRule */,
 			);
 			dependencies = (
 			);
@@ -417,23 +449,6 @@
 			targetProxy = B1060042 /* PBXContainerItemProxy */;
 		};
 /* End PBXTargetDependency section */
-
-/* Begin PBXContainerItemProxy section */
-		B1060041 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B1080001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B1060001;
-			remoteInfo = Delight2Travel;
-		};
-		B1060042 /* PBXContainerItemProxy */ = {
-			isa = PBXContainerItemProxy;
-			containerPortal = B1080001 /* Project object */;
-			proxyType = 1;
-			remoteGlobalIDString = B1060001;
-			remoteInfo = Delight2Travel;
-		};
-/* End PBXContainerItemProxy section */
 
 /* Begin XCBuildConfiguration section */
 		B1090001 /* Debug */ = {
