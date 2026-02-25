@@ -13,24 +13,17 @@ final class TravelDocumentsAPIClientTests: XCTestCase {
         XCTAssertEqual(layovers, ["Dubai"])
     }
 
-    func testResponseDecodingDocumentsArray() throws {
+    func testResponseDecoding() throws {
         let json = """
-        { "documents": [ { "name": "Passport", "leg": "destination" }, { "name": "Visa", "leg": null } ] }
+        { "origin": "Dallas", "destination": "Delhi", "layover": "", "nationality": "", "documents": ["Valid passport with at least 6 months validity", "India visa (e-visa or regular visa) if required"] }
         """
         let data = json.data(using: .utf8)!
         let response = try JSONDecoder().decode(TravelDocumentsResponse.self, from: data)
-        XCTAssertEqual(response.documents?.count, 2)
-        XCTAssertEqual(response.displayDocumentNames, ["Passport", "Visa"])
-    }
-
-    func testResponseDecodingByLeg() throws {
-        let json = """
-        { "byLeg": { "Tokyo": ["Passport", "Visa"], "Dubai": ["Passport"] } }
-        """
-        let data = json.data(using: .utf8)!
-        let response = try JSONDecoder().decode(TravelDocumentsResponse.self, from: data)
-        XCTAssertEqual(response.byLeg?["Tokyo"], ["Passport", "Visa"])
-        XCTAssertTrue(response.displayDocumentNames.contains("Passport"))
-        XCTAssertTrue(response.displayDocumentNames.contains("Visa"))
+        XCTAssertEqual(response.origin, "Dallas")
+        XCTAssertEqual(response.destination, "Delhi")
+        XCTAssertEqual(response.layover, "")
+        XCTAssertEqual(response.nationality, "")
+        XCTAssertEqual(response.documents.count, 2)
+        XCTAssertEqual(response.displayDocumentNames, ["Valid passport with at least 6 months validity", "India visa (e-visa or regular visa) if required"])
     }
 }

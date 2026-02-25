@@ -10,5 +10,5 @@ enum APIEndpoint {
         }
     }
 
-    var method: String { "POST" }
+    var method: String { "GET" }
 }

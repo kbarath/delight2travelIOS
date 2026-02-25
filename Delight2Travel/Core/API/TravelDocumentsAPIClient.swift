@@ -1,7 +1,7 @@
 import Foundation
 
 protocol TravelDocumentsAPIProtocol: Sendable {
-    func fetchTravelDocuments(origin: String, layovers: [String], destination: String) async throws -> TravelDocumentsResponse
+    func fetchTravelDocuments(origin: String, layover: String, destination: String) async throws -> TravelDocumentsResponse
 }
 
 final class TravelDocumentsAPIClient: TravelDocumentsAPIProtocol {
@@ -13,13 +13,21 @@ final class TravelDocumentsAPIClient: TravelDocumentsAPIProtocol {
         self.endpoint = endpoint
     }
 
-    func fetchTravelDocuments(origin: String, layovers: [String], destination: String) async throws -> TravelDocumentsResponse {
-        let request = TripRequest(origin: origin, layovers: layovers, destination: destination)
-        var urlRequest = URLRequest(url: endpoint.url)
+    func fetchTravelDocuments(origin: String, layover: String, destination: String) async throws -> TravelDocumentsResponse {
+        guard var components = URLComponents(url: endpoint.url, resolvingAgainstBaseURL: false) else {
+            throw APIError.invalidURL
+        }
+        components.queryItems = [
+            URLQueryItem(name: "origin", value: origin),
+            URLQueryItem(name: "layover", value: layover),
+            URLQueryItem(name: "destination", value: destination)
+        ]
+        guard let url = components.url else {
+            throw APIError.invalidURL
+        }
+        var urlRequest = URLRequest(url: url)
         urlRequest.httpMethod = endpoint.method
-        urlRequest.setValue("application/json", forHTTPHeaderField: "Content-Type")
         urlRequest.setValue("application/json", forHTTPHeaderField: "Accept")
-        urlRequest.httpBody = try JSONEncoder().encode(request)
 
         let (data, response) = try await session.data(for: urlRequest)
 
@@ -31,9 +39,55 @@ final class TravelDocumentsAPIClient: TravelDocumentsAPIProtocol {
         }
 
         do {
-            return try JSONDecoder().decode(TravelDocumentsResponse.self, from: data)
+            return try Self.decodeResponse(data)
         } catch {
             throw APIError.decoding(error)
         }
+    }
+
+    /// Decodes API response, supporting direct JSON or common wrappers (e.g. n8n "body"/"data").
+    private static func decodeResponse(_ data: Data) throws -> TravelDocumentsResponse {
+        // 1. Direct: { "origin", "destination", "layover", "nationality", "documents": [...] }
+        if let response = try? JSONDecoder().decode(TravelDocumentsResponse.self, from: data) {
+            return response
+        }
+
+        // 2. Direct with snake_case keys: "by_leg", etc.
+        let snakeDecoder = JSONDecoder()
+        snakeDecoder.keyDecodingStrategy = .convertFromSnakeCase
+        if let response = try? snakeDecoder.decode(TravelDocumentsResponse.self, from: data) {
+            return response
+        }
+
+        // 3. Wrapped in "body" (common in n8n Respond to Webhook)
+        struct BodyWrapper: Decodable {
+            let body: TravelDocumentsResponse
+        }
+        if let wrapper = try? JSONDecoder().decode(BodyWrapper.self, from: data) {
+            return wrapper.body
+        }
+
+        // 4. Wrapped in "data"
+        struct DataWrapper: Decodable {
+            let data: TravelDocumentsResponse
+        }
+        if let wrapper = try? JSONDecoder().decode(DataWrapper.self, from: data) {
+            return wrapper.data
+        }
+
+        // 5. Wrapped in "json"
+        struct JsonWrapper: Decodable {
+            let json: TravelDocumentsResponse
+        }
+        if let wrapper = try? JSONDecoder().decode(JsonWrapper.self, from: data) {
+            return wrapper.json
+        }
+
+        // 6. Fail with a more helpful error including response preview
+        let preview = String(data: data.prefix(300), encoding: .utf8) ?? "<non-UTF8>"
+        let decodingError = DecodingError.dataCorrupted(
+            .init(codingPath: [], debugDescription: "Response is not valid JSON for travel documents. Expected object with 'documents' (array of strings), optional 'origin', 'destination', 'layover', 'nationality'. Preview: \(preview)")
+        )
+        throw decodingError
     }
 }

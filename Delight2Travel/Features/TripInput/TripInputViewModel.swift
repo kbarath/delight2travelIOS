@@ -43,10 +43,13 @@ final class TripInputViewModel: ObservableObject {
 
         let o = origin.trimmingCharacters(in: .whitespaces)
         let d = destination.trimmingCharacters(in: .whitespaces)
-        let lays = layovers.map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+        let layoverCSV = layovers
+            .map { $0.trimmingCharacters(in: .whitespaces) }
+            .filter { !$0.isEmpty }
+            .joined(separator: ",")
 
         do {
-            let response = try await apiClient.fetchTravelDocuments(origin: o, layovers: lays, destination: d)
+            let response = try await apiClient.fetchTravelDocuments(origin: o, layover: layoverCSV, destination: d)
             lastResponse = response
             showResults = true
         } catch {

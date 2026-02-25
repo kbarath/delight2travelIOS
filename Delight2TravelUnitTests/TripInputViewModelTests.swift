@@ -58,7 +58,7 @@ final class TripInputViewModelTests: XCTestCase {
 
     func testSubmitShowsResultsOnSuccess() async {
         let mock = MockTravelDocumentsAPI()
-        mock.result = .success(TravelDocumentsResponse(documents: [.init(name: "Passport", leg: nil)], byLeg: nil))
+        mock.result = .success(TravelDocumentsResponse(documents: ["Passport"]))
         let vm = TripInputViewModel(apiClient: mock)
         vm.origin = "SF"
         vm.destination = "Tokyo"

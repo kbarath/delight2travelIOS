@@ -1,39 +1,40 @@
 import Foundation
 
 struct TravelDocumentsResponse: Decodable {
-    let documents: [DocumentItem]?
-    let byLeg: [String: [String]]?
+    let origin: String
+    let destination: String
+    let layover: String
+    let nationality: String
+    let documents: [String]
 
-    init(documents: [DocumentItem]?, byLeg: [String: [String]]?) {
+    init(origin: String = "", destination: String = "", layover: String = "", nationality: String = "", documents: [String] = []) {
+        self.origin = origin
+        self.destination = destination
+        self.layover = layover
+        self.nationality = nationality
         self.documents = documents
-        self.byLeg = byLeg
     }
 
-    struct DocumentItem: Decodable {
-        let name: String
-        let leg: String?
+    init(from decoder: Decoder) throws {
+        let c = try decoder.container(keyedBy: CodingKeys.self)
+        origin = try c.decodeIfPresent(String.self, forKey: .origin) ?? ""
+        destination = try c.decodeIfPresent(String.self, forKey: .destination) ?? ""
+        layover = try c.decodeIfPresent(String.self, forKey: .layover) ?? ""
+        nationality = try c.decodeIfPresent(String.self, forKey: .nationality) ?? ""
+        documents = try c.decodeIfPresent([String].self, forKey: .documents) ?? []
     }
 
-    /// Flattened list of document names for display (from documents array or byLeg).
+    private enum CodingKeys: String, CodingKey {
+        case origin, destination, layover, nationality, documents
+    }
+
+    /// Flattened list of document names for display.
     var displayDocumentNames: [String] {
-        if let docs = documents, !docs.isEmpty {
-            return docs.map { $0.name }
-        }
-        if let byLeg = byLeg {
-            return Array(Set(byLeg.values.flatMap { $0 })).sorted()
-        }
-        return []
+        documents
     }
 
-    /// Documents grouped by leg for sectioned display.
+    /// Documents grouped by leg for sectioned display. Empty for this response format (flat list).
     var documentsByLeg: [(leg: String, documents: [String])] {
-        if let byLeg = byLeg {
-            return byLeg.map { (leg: $0.key, documents: $0.value) }.sorted { $0.leg < $1.leg }
-        }
-        if let docs = documents, !docs.isEmpty {
-            let grouped = Dictionary(grouping: docs, by: { $0.leg ?? "General" })
-            return grouped.map { (leg: $0.key, documents: $0.value.map { $0.name }) }.sorted { $0.leg < $1.leg }
-        }
-        return []
+        []
     }
 }
