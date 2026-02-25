@@ -3,35 +3,30 @@ import XCTest
 
 final class TravelDocumentsResponseTests: XCTestCase {
 
-    func testDisplayDocumentNamesFromDocuments() {
+    func testDisplayDocumentNames() {
         let response = TravelDocumentsResponse(
-            documents: [
-                .init(name: "Passport", leg: nil),
-                .init(name: "Visa", leg: "destination")
-            ],
-            byLeg: nil
+            origin: "Dallas",
+            destination: "Delhi",
+            layover: "",
+            nationality: "",
+            documents: ["Passport", "Visa"]
         )
         XCTAssertEqual(response.displayDocumentNames, ["Passport", "Visa"])
     }
 
-    func testDisplayDocumentNamesFromByLeg() {
-        let response = TravelDocumentsResponse(
-            documents: nil,
-            byLeg: ["Tokyo": ["Passport", "Visa"], "Dubai": ["Passport"]]
-        )
-        let names = response.displayDocumentNames
-        XCTAssertEqual(Set(names), ["Passport", "Visa"])
+    func testDocumentsByLegIsEmpty() {
+        let response = TravelDocumentsResponse(documents: ["Passport", "Visa"])
+        XCTAssertTrue(response.documentsByLeg.isEmpty)
     }
 
-    func testDocumentsByLeg() {
-        let response = TravelDocumentsResponse(
-            documents: nil,
-            byLeg: ["Tokyo": ["Passport", "Visa"], "Dubai": ["Passport"]]
-        )
-        let byLeg = response.documentsByLeg
-        XCTAssertEqual(byLeg.count, 2)
-        let legs = Set(byLeg.map(\.leg))
-        XCTAssertTrue(legs.contains("Tokyo"))
-        XCTAssertTrue(legs.contains("Dubai"))
+    func testDecodingFromJSON() throws {
+        let json = """
+        {"origin":"Dallas","destination":"Delhi","layover":"","nationality":"","documents":["Valid passport","India visa"]}
+        """
+        let data = json.data(using: .utf8)!
+        let response = try JSONDecoder().decode(TravelDocumentsResponse.self, from: data)
+        XCTAssertEqual(response.origin, "Dallas")
+        XCTAssertEqual(response.destination, "Delhi")
+        XCTAssertEqual(response.documents, ["Valid passport", "India visa"])
     }
 }

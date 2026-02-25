@@ -9,8 +9,6 @@ struct DocumentsResultsView: View {
             ScrollView {
                 VStack(spacing: 20) {
                     documentsCard
-                    popularDestinationsCard
-                    servicesCard
                 }
                 .padding()
             }
@@ -65,70 +63,5 @@ struct DocumentsResultsView: View {
             }
         }
         .accessibilityIdentifier("resultsList")
-    }
-
-    private var popularDestinationsCard: some View {
-        CardView {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Popular destinations")
-                    .font(AppTypography.headline())
-                    .foregroundColor(AppColors.textPrimary)
-                Text("Documents typically required")
-                    .font(AppTypography.caption())
-                    .foregroundColor(AppColors.textSecondary)
-
-                VStack(alignment: .leading, spacing: 6) {
-                    destinationRow("Tokyo", docs: "Passport, Visa, Travel insurance")
-                    destinationRow("Paris", docs: "Passport, Schengen visa")
-                    destinationRow("Dubai", docs: "Passport, Visa on arrival / e-Visa")
-                    destinationRow("Singapore", docs: "Passport, Visa (if required)")
-                    destinationRow("London", docs: "Passport, UK visa")
-                }
-            }
-        }
-    }
-
-    private func destinationRow(_ city: String, docs: String) -> some View {
-        HStack(alignment: .top, spacing: 8) {
-            Text("\(city):")
-                .font(AppTypography.body())
-                .foregroundColor(AppColors.textPrimary)
-                .frame(width: 90, alignment: .leading)
-            Text(docs)
-                .font(AppTypography.caption())
-                .foregroundColor(AppColors.textSecondary)
-        }
-    }
-
-    private var servicesCard: some View {
-        CardView {
-            VStack(alignment: .leading, spacing: 10) {
-                Text("Services we offer")
-                    .font(AppTypography.headline())
-                    .foregroundColor(AppColors.textPrimary)
-                Text("Make your trip smoother")
-                    .font(AppTypography.caption())
-                    .foregroundColor(AppColors.textSecondary)
-
-                let services = [
-                    "Visa assistance",
-                    "Airport pick-up & drop",
-                    "Travel SIM cards",
-                    "Travel insurance",
-                    "Hotel & transport bookings"
-                ]
-                VStack(alignment: .leading, spacing: 6) {
-                    ForEach(services, id: \.self) { service in
-                        HStack(spacing: 8) {
-                            Image(systemName: "checkmark.circle.fill")
-                                .foregroundColor(AppColors.successCheck)
-                            Text(service)
-                                .font(AppTypography.body())
-                                .foregroundColor(AppColors.textPrimary)
-                        }
-                    }
-                }
-            }
-        }
     }
 }

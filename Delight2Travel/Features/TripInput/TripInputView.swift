@@ -5,39 +5,31 @@ struct TripInputView: View {
 
     var body: some View {
         ScrollView {
-            VStack(spacing: 24) {
+            VStack(alignment: .leading, spacing: 24) {
                 header
                 tripFormCard
                 if let message = viewModel.errorMessage {
                     errorBanner(message)
                 }
+                if viewModel.lastResponse != nil {
+                    yourRouteSection
+                }
             }
             .padding()
+            .padding(.bottom, 32)
         }
     }
 
     private var header: some View {
-        VStack(spacing: 8) {
-            Image(systemName: "airplane.circle.fill")
-                .font(.system(size: 44))
-                .foregroundColor(AppColors.accentTeal)
-            Text("Delight2Travel")
-                .font(AppTypography.title())
-                .foregroundColor(AppColors.textPrimary)
-            Text("Docs Done. Departure Ready.")
-                .font(AppTypography.caption())
-                .foregroundColor(AppColors.textSecondary)
-        }
-        .padding(.top, 20)
+        Text("Checklist of travel documents for your trip.")
+            .font(AppTypography.headline())
+            .foregroundColor(AppColors.textPrimary)
+            .padding(.top, 8)
     }
 
     private var tripFormCard: some View {
         CardView {
             VStack(alignment: .leading, spacing: 20) {
-                Text("Checklist of travel documents for your trip.")
-                    .font(AppTypography.headline())
-                    .foregroundColor(AppColors.textPrimary)
-
                 LabeledTextField(
                     label: "ORIGIN CITY",
                     text: $viewModel.origin,
@@ -50,29 +42,17 @@ struct TripInputView: View {
                 LabeledTextField(
                     label: "DESTINATION CITY",
                     text: $viewModel.destination,
-                    placeholder: "e.g. Tokyo",
+                    placeholder: "e.g. Chennai",
                     accessibilityId: "destinationField"
                 )
 
-                PrimaryButton(
-                    title: "Go",
-                    action: { Task { await viewModel.submit() } },
-                    isEnabled: viewModel.canSubmit && !viewModel.isLoading,
-                    accessibilityId: "goButton"
-                )
-                .opacity(viewModel.isLoading ? 0.7 : 1)
-                .overlay {
-                    if viewModel.isLoading {
-                        ProgressView()
-                            .tint(.white)
-                    }
-                }
+                goButton
             }
         }
     }
 
     private var layoversSection: some View {
-        VStack(alignment: .leading, spacing: 8) {
+        VStack(alignment: .leading, spacing: 10) {
             HStack {
                 Text("LAYOVER CITIES (OPTIONAL)")
                     .font(AppTypography.label())
@@ -81,41 +61,171 @@ struct TripInputView: View {
                 Button {
                     viewModel.addLayover()
                 } label: {
-                    HStack(spacing: 4) {
-                        Image(systemName: "plus.circle.fill")
-                        Text("Add layover")
-                    }
-                    .font(AppTypography.caption())
-                    .foregroundColor(AppColors.primaryButton)
+                    Text("+ Add layover")
+                        .font(AppTypography.caption())
+                        .foregroundColor(AppColors.primaryButton)
+                        .padding(.horizontal, 12)
+                        .padding(.vertical, 8)
+                        .overlay(
+                            RoundedRectangle(cornerRadius: 8)
+                                .strokeBorder(style: StrokeStyle(lineWidth: 1, dash: [6]))
+                                .foregroundColor(AppColors.textSecondary.opacity(0.6))
+                        )
                 }
                 .accessibilityIdentifier("addLayoverButton")
             }
 
             ForEach(Array(viewModel.layovers.enumerated()), id: \.offset) { index, _ in
                 HStack(spacing: 8) {
-                    LabeledTextField(
-                        label: "Layover \(index + 1)",
-                        text: Binding(
-                            get: { viewModel.layovers.indices.contains(index) ? viewModel.layovers[index] : "" },
-                            set: { new in
-                                var copy = viewModel.layovers
-                                if copy.indices.contains(index) {
-                                    copy[index] = new
-                                    viewModel.layovers = copy
-                                }
+                    TextField("City name", text: Binding(
+                        get: { viewModel.layovers.indices.contains(index) ? viewModel.layovers[index] : "" },
+                        set: { new in
+                            var copy = viewModel.layovers
+                            if copy.indices.contains(index) {
+                                copy[index] = new
+                                viewModel.layovers = copy
                             }
-                        ),
-                        placeholder: "City name"
-                    )
+                        }
+                    ))
+                    .textFieldStyle(.plain)
+                    .padding(12)
+                    .background(Color.white.opacity(0.08))
+                    .foregroundColor(AppColors.textPrimary)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
                     .accessibilityIdentifier("layoverField_\(index)")
 
                     Button {
                         viewModel.removeLayover(at: index)
                     } label: {
-                        Image(systemName: "minus.circle.fill")
+                        Image(systemName: "xmark.circle.fill")
+                            .font(.system(size: 22))
                             .foregroundColor(AppColors.textSecondary)
                     }
                     .accessibilityIdentifier("removeLayover_\(index)")
+                }
+            }
+        }
+    }
+
+    private var goButton: some View {
+        Button {
+            Task { await viewModel.submit() }
+        } label: {
+            Text("Go")
+                .font(AppTypography.headline())
+                .foregroundColor(.white)
+                .frame(maxWidth: .infinity)
+                .padding(.vertical, 14)
+                .background(
+                    LinearGradient(
+                        colors: [AppColors.primaryButton, AppColors.primaryButtonGradientEnd],
+                        startPoint: .leading,
+                        endPoint: .trailing
+                    )
+                )
+                .clipShape(RoundedRectangle(cornerRadius: 12))
+        }
+        .disabled(!viewModel.canSubmit || viewModel.isLoading)
+        .opacity(viewModel.isLoading ? 0.7 : 1)
+        .overlay {
+            if viewModel.isLoading {
+                ProgressView()
+                    .tint(.white)
+            }
+        }
+        .accessibilityIdentifier("goButton")
+    }
+
+    // MARK: - Your route (single-page results)
+
+    private var yourRouteSection: some View {
+        CardView {
+            VStack(alignment: .leading, spacing: 0) {
+                Text("Your route")
+                    .font(AppTypography.headline())
+                    .foregroundColor(AppColors.textPrimary)
+                    .padding(.bottom, 16)
+
+                ScrollView {
+                    VStack(alignment: .leading, spacing: 0) {
+                        routeTimeline
+                        travelDocumentsNeeded
+                    }
+                }
+                .frame(maxHeight: 400)
+            }
+        }
+        .accessibilityIdentifier("resultsList")
+    }
+
+    private var routeTimeline: some View {
+        let originCity = viewModel.origin.trimmingCharacters(in: .whitespaces)
+        let destinationCity = viewModel.destination.trimmingCharacters(in: .whitespaces)
+        let layoverCities = viewModel.layovers.map { $0.trimmingCharacters(in: .whitespaces) }.filter { !$0.isEmpty }
+
+        return VStack(alignment: .leading, spacing: 0) {
+            routeNode(label: "ORIGIN", city: originCity, isLast: false)
+            ForEach(Array(layoverCities.enumerated()), id: \.offset) { _, city in
+                routeNode(label: "LAYOVER", city: city.isEmpty ? "—" : city, isLast: false)
+            }
+            routeNode(label: "DESTINATION", city: destinationCity, isLast: true)
+        }
+    }
+
+    private func routeNode(label: String, city: String, isLast: Bool) -> some View {
+        HStack(alignment: .top, spacing: 12) {
+            VStack(spacing: 0) {
+                Circle()
+                    .fill(AppColors.accentTeal)
+                    .frame(width: 10, height: 10)
+                if !isLast {
+                    Rectangle()
+                        .fill(AppColors.textSecondary.opacity(0.4))
+                        .frame(width: 2)
+                        .frame(minHeight: 28)
+                }
+            }
+            .frame(width: 10)
+
+            VStack(alignment: .leading, spacing: 6) {
+                Text(label)
+                    .font(AppTypography.label())
+                    .foregroundColor(AppColors.textSecondary)
+                Text(city.isEmpty ? "—" : city)
+                    .font(.system(size: 16, weight: .semibold))
+                    .foregroundColor(AppColors.textPrimary)
+            }
+            .padding(.bottom, isLast ? 0 : 12)
+
+            Spacer(minLength: 0)
+        }
+    }
+
+    private var travelDocumentsNeeded: some View {
+        let documents = viewModel.lastResponse?.displayDocumentNames ?? []
+
+        return VStack(alignment: .leading, spacing: 10) {
+            Text("TRAVEL DOCUMENTS NEEDED")
+                .font(AppTypography.label())
+                .foregroundColor(AppColors.textSecondary)
+                .padding(.top, 8)
+
+            if documents.isEmpty {
+                Text("No specific documents returned for this route.")
+                    .font(AppTypography.body())
+                    .foregroundColor(AppColors.textSecondary)
+            } else {
+                VStack(alignment: .leading, spacing: 8) {
+                    ForEach(documents, id: \.self) { name in
+                        HStack(spacing: 10) {
+                            Image(systemName: "doc.fill")
+                                .font(.body)
+                                .foregroundColor(AppColors.accentTeal)
+                            Text(name)
+                                .font(AppTypography.body())
+                                .foregroundColor(AppColors.textPrimary)
+                        }
+                    }
                 }
             }
         }

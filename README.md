@@ -14,7 +14,7 @@ The app calls the n8n webhook at:
 
 - `https://n8n.srv1148585.hstgr.cloud/webhook/dc3ae967-f844-47f4-8f53-f071a8e60181`
 
-**Request:** `POST` with JSON body:
+**Request:** `GET` with JSON body:
 
 - `origin`: string  
 - `layovers`: array of strings (optional)  

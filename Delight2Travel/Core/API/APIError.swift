@@ -18,6 +18,9 @@ enum APIError: Error, LocalizedError {
         case .decoding(let error):
             return "Could not read response: \(error.localizedDescription)"
         case .server(let code):
+            if code == 404 {
+                return "Webhook not found (404). In n8n: turn the workflow ON (toggle top-right) and ensure the Webhook node uses POST and this URL."
+            }
             return "Server error (code \(code)). Please try again."
         }
     }
