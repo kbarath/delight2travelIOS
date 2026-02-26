@@ -21,10 +21,19 @@ struct TripInputView: View {
     }
 
     private var header: some View {
-        Text("Checklist of travel documents for your trip.")
-            .font(AppTypography.headline())
-            .foregroundColor(AppColors.textPrimary)
-            .padding(.top, 8)
+        VStack(spacing: 12) {
+            Image("AppLogo")
+                .resizable()
+                .scaledToFit()
+                .frame(height: 48)
+                .accessibilityHidden(true)
+            Text("Checklist of travel documents for your trip.")
+                .font(AppTypography.headline())
+                .foregroundColor(AppColors.textPrimary)
+                .multilineTextAlignment(.center)
+        }
+        .frame(maxWidth: .infinity)
+        .padding(.top, 8)
     }
 
     private var tripFormCard: some View {
