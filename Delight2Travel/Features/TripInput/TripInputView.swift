@@ -40,20 +40,28 @@ struct TripInputView: View {
         CardView {
             VStack(alignment: .leading, spacing: 20) {
                 LabeledTextField(
-                    label: "ORIGIN CITY",
+                    label: "Nationality",
+                    text: $viewModel.nationality,
+                    placeholder: "e.g. USA, UK, Canada",
+                    accessibilityId: "nationalityField"
+                )
+                LabeledTextField(
+                    label: "Origin",
                     text: $viewModel.origin,
                     placeholder: "e.g. San Francisco",
-                    accessibilityId: "originField"
+                    accessibilityId: "originCityField"
                 )
 
                 layoversSection
 
                 LabeledTextField(
-                    label: "DESTINATION CITY",
+                    label: "Destination",
                     text: $viewModel.destination,
-                    placeholder: "e.g. Chennai",
-                    accessibilityId: "destinationField"
+                    placeholder: "e.g. London",
+                    accessibilityId: "destinationCityField"
                 )
+
+
 
                 goButton
             }
