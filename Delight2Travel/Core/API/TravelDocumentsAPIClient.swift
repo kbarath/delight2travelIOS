@@ -1,7 +1,7 @@
 import Foundation
 
 protocol TravelDocumentsAPIProtocol: Sendable {
-    func fetchTravelDocuments(origin: String, layover: String, destination: String) async throws -> TravelDocumentsResponse
+    func fetchTravelDocuments(origin: String, layover: String, destination: String, nationality: String) async throws -> TravelDocumentsResponse
 }
 
 final class TravelDocumentsAPIClient: TravelDocumentsAPIProtocol {
@@ -13,14 +13,15 @@ final class TravelDocumentsAPIClient: TravelDocumentsAPIProtocol {
         self.endpoint = endpoint
     }
 
-    func fetchTravelDocuments(origin: String, layover: String, destination: String) async throws -> TravelDocumentsResponse {
+    func fetchTravelDocuments(origin: String, layover: String, destination: String, nationality: String) async throws -> TravelDocumentsResponse {
         guard var components = URLComponents(url: endpoint.url, resolvingAgainstBaseURL: false) else {
             throw APIError.invalidURL
         }
         components.queryItems = [
             URLQueryItem(name: "origin", value: origin),
             URLQueryItem(name: "layover", value: layover),
-            URLQueryItem(name: "destination", value: destination)
+            URLQueryItem(name: "destination", value: destination),
+            URLQueryItem(name: "nationality", value: nationality)
         ]
         guard let url = components.url else {
             throw APIError.invalidURL

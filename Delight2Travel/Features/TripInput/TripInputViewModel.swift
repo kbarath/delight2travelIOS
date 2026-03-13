@@ -6,6 +6,7 @@ final class TripInputViewModel: ObservableObject {
     @Published var origin: String = ""
     @Published var layovers: [String] = []
     @Published var destination: String = ""
+    @Published var nationality: String = ""
     @Published var isLoading: Bool = false
     @Published var errorMessage: String?
     @Published var showResults: Bool = false
@@ -15,7 +16,8 @@ final class TripInputViewModel: ObservableObject {
 
     var canSubmit: Bool {
         !origin.trimmingCharacters(in: .whitespaces).isEmpty &&
-        !destination.trimmingCharacters(in: .whitespaces).isEmpty
+        !destination.trimmingCharacters(in: .whitespaces).isEmpty &&
+        !nationality.trimmingCharacters(in: .whitespaces).isEmpty
     }
 
     init(apiClient: TravelDocumentsAPIProtocol) {
@@ -43,13 +45,14 @@ final class TripInputViewModel: ObservableObject {
 
         let o = origin.trimmingCharacters(in: .whitespaces)
         let d = destination.trimmingCharacters(in: .whitespaces)
+        let n = nationality.trimmingCharacters(in: .whitespaces)
         let layoverCSV = layovers
             .map { $0.trimmingCharacters(in: .whitespaces) }
             .filter { !$0.isEmpty }
             .joined(separator: ",")
 
         do {
-            let response = try await apiClient.fetchTravelDocuments(origin: o, layover: layoverCSV, destination: d)
+            let response = try await apiClient.fetchTravelDocuments(origin: o, layover: layoverCSV, destination: d, nationality: n)
             lastResponse = response
             showResults = true
         } catch {
