@@ -1,5 +1,7 @@
 import SwiftUI
 
+private let MAX_FIELD_WIDTH = 20
+
 struct TripInputView: View {
     @ObservedObject var viewModel: TripInputViewModel
 
@@ -43,14 +45,18 @@ struct TripInputView: View {
                     label: "Nationality",
                     text: $viewModel.nationality,
                     placeholder: "e.g. USA, UK, Canada",
-                    accessibilityId: "nationalityField"
+                    accessibilityId: "nationalityField",
+                    maxLength: MAX_FIELD_WIDTH
                 )
+                .frame(maxWidth: 280, alignment: .leading)
                 LabeledTextField(
                     label: "Origin",
                     text: $viewModel.origin,
                     placeholder: "e.g. San Francisco",
-                    accessibilityId: "originCityField"
+                    accessibilityId: "originCityField",
+                    maxLength: MAX_FIELD_WIDTH
                 )
+                .frame(maxWidth: 280, alignment: .leading)
 
                 layoversSection
 
@@ -58,8 +64,10 @@ struct TripInputView: View {
                     label: "Destination",
                     text: $viewModel.destination,
                     placeholder: "e.g. London",
-                    accessibilityId: "destinationCityField"
+                    accessibilityId: "destinationCityField",
+                    maxLength: MAX_FIELD_WIDTH
                 )
+                .frame(maxWidth: 280, alignment: .leading)
 
 
 
@@ -99,7 +107,7 @@ struct TripInputView: View {
                         set: { new in
                             var copy = viewModel.layovers
                             if copy.indices.contains(index) {
-                                copy[index] = new
+                                copy[index] = String(new.prefix(MAX_FIELD_WIDTH))
                                 viewModel.layovers = copy
                             }
                         }
@@ -109,6 +117,7 @@ struct TripInputView: View {
                     .background(Color.white.opacity(0.08))
                     .foregroundColor(AppColors.textPrimary)
                     .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .frame(maxWidth: 280, alignment: .leading)
                     .accessibilityIdentifier("layoverField_\(index)")
 
                     Button {

@@ -5,6 +5,7 @@ struct LabeledTextField: View {
     @Binding var text: String
     var placeholder: String = ""
     var accessibilityId: String?
+    var maxLength: Int?
 
     var body: some View {
         VStack(alignment: .leading, spacing: 6) {
@@ -13,6 +14,11 @@ struct LabeledTextField: View {
                 .foregroundColor(AppColors.textSecondary)
             TextField(placeholder, text: $text)
                 .textFieldStyle(.plain)
+                .onChange(of: text) { newValue in
+                    if let maxLength, newValue.count > maxLength {
+                        text = String(newValue.prefix(maxLength))
+                    }
+                }
                 .padding(12)
                 .background(Color.white.opacity(0.08))
                 .foregroundColor(AppColors.textPrimary)
