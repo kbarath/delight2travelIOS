@@ -1,6 +1,6 @@
 import Foundation
 
-struct TripRequest: Encodable {
+struct TripRequest: Codable {
     let origin: String
     let layovers: [String]
     let destination: String

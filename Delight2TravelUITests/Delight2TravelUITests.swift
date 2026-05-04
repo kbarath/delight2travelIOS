@@ -10,8 +10,9 @@ final class Delight2TravelUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        XCTAssertTrue(app.textFields["originField"].waitForExistence(timeout: 3))
-        XCTAssertTrue(app.textFields["destinationField"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.textFields["nationalityField"].waitForExistence(timeout: 3))
+        XCTAssertTrue(app.textFields["originCityField"].waitForExistence(timeout: 2))
+        XCTAssertTrue(app.textFields["destinationCityField"].waitForExistence(timeout: 2))
         XCTAssertTrue(app.buttons["goButton"].exists)
     }
 
@@ -19,14 +20,14 @@ final class Delight2TravelUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        app.textFields["destinationField"].tap()
-        app.textFields["destinationField"].typeText("Tokyo")
+        app.textFields["destinationCityField"].tap()
+        app.textFields["destinationCityField"].typeText("Tokyo")
         XCTAssertTrue(app.buttons["goButton"].exists)
         let goButton = app.buttons["goButton"]
         XCTAssertTrue(goButton.exists)
         if goButton.isEnabled {
             goButton.tap()
-            XCTAssertTrue(app.textFields["originField"].waitForExistence(timeout: 1))
+            XCTAssertTrue(app.textFields["originCityField"].waitForExistence(timeout: 1))
         }
     }
 
@@ -41,10 +42,10 @@ final class Delight2TravelUITests: XCTestCase {
         let app = XCUIApplication()
         app.launch()
 
-        app.textFields["originField"].tap()
-        app.textFields["originField"].typeText("San Francisco")
-        app.textFields["destinationField"].tap()
-        app.textFields["destinationField"].typeText("Tokyo")
+        app.textFields["originCityField"].tap()
+        app.textFields["originCityField"].typeText("San Francisco")
+        app.textFields["destinationCityField"].tap()
+        app.textFields["destinationCityField"].typeText("Tokyo")
 
         let goButton = app.buttons["goButton"]
         if goButton.isEnabled {
