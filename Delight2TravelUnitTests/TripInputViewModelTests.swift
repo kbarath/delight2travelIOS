@@ -9,16 +9,19 @@ final class TripInputViewModelTests: XCTestCase {
         let vm = TripInputViewModel(apiClient: mock)
         XCTAssertTrue(vm.origin.isEmpty)
         XCTAssertTrue(vm.destination.isEmpty)
+        XCTAssertTrue(vm.nationality.isEmpty)
         XCTAssertTrue(vm.layovers.isEmpty)
         XCTAssertFalse(vm.canSubmit)
     }
 
-    func testCanSubmitRequiresOriginAndDestination() {
+    func testCanSubmitRequiresOriginDestinationAndNationality() {
         let mock = MockTravelDocumentsAPI()
         let vm = TripInputViewModel(apiClient: mock)
         vm.origin = "SF"
         XCTAssertFalse(vm.canSubmit)
         vm.destination = "Tokyo"
+        XCTAssertFalse(vm.canSubmit)
+        vm.nationality = "USA"
         XCTAssertTrue(vm.canSubmit)
         vm.origin = ""
         XCTAssertFalse(vm.canSubmit)
@@ -49,10 +52,12 @@ final class TripInputViewModelTests: XCTestCase {
         let vm = TripInputViewModel(apiClient: mock)
         vm.origin = "  SF  "
         vm.destination = " Tokyo "
+        vm.nationality = " USA "
         vm.layovers = ["  Dubai  "]
         await vm.submit()
         XCTAssertEqual(mock.lastOrigin, "SF")
         XCTAssertEqual(mock.lastDestination, "Tokyo")
+        XCTAssertEqual(mock.lastNationality, "USA")
         XCTAssertEqual(mock.lastLayovers, ["Dubai"])
     }
 
@@ -62,6 +67,7 @@ final class TripInputViewModelTests: XCTestCase {
         let vm = TripInputViewModel(apiClient: mock)
         vm.origin = "SF"
         vm.destination = "Tokyo"
+        vm.nationality = "USA"
         await vm.submit()
         XCTAssertTrue(vm.showResults)
         XCTAssertNotNil(vm.lastResponse)
@@ -74,6 +80,7 @@ final class TripInputViewModelTests: XCTestCase {
         let vm = TripInputViewModel(apiClient: mock)
         vm.origin = "SF"
         vm.destination = "Tokyo"
+        vm.nationality = "USA"
         await vm.submit()
         XCTAssertFalse(vm.showResults)
         XCTAssertNotNil(vm.errorMessage)
