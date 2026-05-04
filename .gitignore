@@ -17,6 +17,9 @@ DerivedData/
 *.ipa
 *.dSYM.zip
 *.dSYM
+*.mp4
+*.xcuserstate
+*.xcbkptlist
 timeline.xctimeline
 playground.xcworkspace
 
