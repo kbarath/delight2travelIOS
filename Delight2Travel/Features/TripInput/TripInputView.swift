@@ -4,6 +4,202 @@ private let MAX_FIELD_WIDTH = 20
 
 struct TripInputView: View {
     @ObservedObject var viewModel: TripInputViewModel
+    
+    private let nationalityOptions: [String] = [
+        "Afghanistan",
+        "Albania",
+        "Algeria",
+        "Andorra",
+        "Angola",
+        "Antigua and Barbuda",
+        "Argentina",
+        "Armenia",
+        "Australia",
+        "Austria",
+        "Azerbaijan",
+        "Bahamas",
+        "Bahrain",
+        "Bangladesh",
+        "Barbados",
+        "Belarus",
+        "Belgium",
+        "Belize",
+        "Benin",
+        "Bhutan",
+        "Bolivia",
+        "Bosnia and Herzegovina",
+        "Botswana",
+        "Brazil",
+        "Brunei Darussalam",
+        "Bulgaria",
+        "Burkina Faso",
+        "Burundi",
+        "Cabo Verde",
+        "Cambodia",
+        "Cameroon",
+        "Canada",
+        "Central African Republic",
+        "Chad",
+        "Chile",
+        "China",
+        "Colombia",
+        "Comoros",
+        "Congo",
+        "Costa Rica",
+        "Côte d'Ivoire",
+        "Croatia",
+        "Cuba",
+        "Cyprus",
+        "Czechia",
+        "Democratic People's Republic of Korea",
+        "Democratic Republic of the Congo",
+        "Denmark",
+        "Djibouti",
+        "Dominica",
+        "Dominican Republic",
+        "Ecuador",
+        "Egypt",
+        "El Salvador",
+        "Equatorial Guinea",
+        "Eritrea",
+        "Estonia",
+        "Eswatini",
+        "Ethiopia",
+        "Fiji",
+        "Finland",
+        "France",
+        "Gabon",
+        "Gambia",
+        "Georgia",
+        "Germany",
+        "Ghana",
+        "Greece",
+        "Grenada",
+        "Guatemala",
+        "Guinea",
+        "Guinea-Bissau",
+        "Guyana",
+        "Haiti",
+        "Honduras",
+        "Hungary",
+        "Iceland",
+        "India",
+        "Indonesia",
+        "Iran (Islamic Republic of)",
+        "Iraq",
+        "Ireland",
+        "Israel",
+        "Italy",
+        "Jamaica",
+        "Japan",
+        "Jordan",
+        "Kazakhstan",
+        "Kenya",
+        "Kiribati",
+        "Kuwait",
+        "Kyrgyzstan",
+        "Lao People's Democratic Republic",
+        "Latvia",
+        "Lebanon",
+        "Lesotho",
+        "Liberia",
+        "Libya",
+        "Liechtenstein",
+        "Lithuania",
+        "Luxembourg",
+        "Madagascar",
+        "Malawi",
+        "Malaysia",
+        "Maldives",
+        "Mali",
+        "Malta",
+        "Marshall Islands",
+        "Mauritania",
+        "Mauritius",
+        "Mexico",
+        "Micronesia (Federated States of)",
+        "Monaco",
+        "Mongolia",
+        "Montenegro",
+        "Morocco",
+        "Mozambique",
+        "Myanmar",
+        "Namibia",
+        "Nauru",
+        "Nepal",
+        "Netherlands",
+        "New Zealand",
+        "Nicaragua",
+        "Niger",
+        "Nigeria",
+        "North Macedonia",
+        "Norway",
+        "Oman",
+        "Pakistan",
+        "Palau",
+        "Panama",
+        "Papua New Guinea",
+        "Paraguay",
+        "Peru",
+        "Philippines",
+        "Poland",
+        "Portugal",
+        "Qatar",
+        "Republic of Korea",
+        "Republic of Moldova",
+        "Romania",
+        "Russian Federation",
+        "Rwanda",
+        "Saint Kitts and Nevis",
+        "Saint Lucia",
+        "Saint Vincent and the Grenadines",
+        "Samoa",
+        "San Marino",
+        "Sao Tome and Principe",
+        "Saudi Arabia",
+        "Senegal",
+        "Serbia",
+        "Seychelles",
+        "Sierra Leone",
+        "Singapore",
+        "Slovakia",
+        "Slovenia",
+        "Solomon Islands",
+        "Somalia",
+        "South Africa",
+        "South Sudan",
+        "Spain",
+        "Sri Lanka",
+        "Sudan",
+        "Suriname",
+        "Sweden",
+        "Switzerland",
+        "Syrian Arab Republic",
+        "Tajikistan",
+        "Thailand",
+        "Timor-Leste",
+        "Togo",
+        "Tonga",
+        "Trinidad and Tobago",
+        "Tunisia",
+        "Türkiye",
+        "Turkmenistan",
+        "Tuvalu",
+        "Uganda",
+        "Ukraine",
+        "United Arab Emirates",
+        "United Kingdom",
+        "United Republic of Tanzania",
+        "United States of America",
+        "Uruguay",
+        "Uzbekistan",
+        "Vanuatu",
+        "Venezuela (Bolivarian Republic of)",
+        "Viet Nam",
+        "Yemen",
+        "Zambia",
+        "Zimbabwe"
+    ]
 
     var body: some View {
         ScrollView {
@@ -41,14 +237,8 @@ struct TripInputView: View {
     private var tripFormCard: some View {
         CardView {
             VStack(alignment: .leading, spacing: 20) {
-                LabeledTextField(
-                    label: "Nationality",
-                    text: $viewModel.nationality,
-                    placeholder: "e.g. USA, UK, Canada",
-                    accessibilityId: "nationalityField",
-                    maxLength: MAX_FIELD_WIDTH
-                )
-                .frame(maxWidth: 280, alignment: .leading)
+                nationalityDropdown
+                    .frame(maxWidth: 280, alignment: .leading)
                 LabeledTextField(
                     label: "Origin",
                     text: $viewModel.origin,
@@ -73,6 +263,38 @@ struct TripInputView: View {
 
                 goButton
             }
+        }
+    }
+    
+    private var nationalityDropdown: some View {
+        VStack(alignment: .leading, spacing: 6) {
+            Text("Nationality")
+                .font(AppTypography.label())
+                .foregroundColor(AppColors.textSecondary)
+            
+            Menu {
+                ForEach(nationalityOptions, id: \.self) { option in
+                    Button(option) { viewModel.nationality = option }
+                }
+            } label: {
+                HStack(spacing: 10) {
+                    Text(viewModel.nationality.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Select nationality" : viewModel.nationality)
+                        .foregroundColor(
+                            viewModel.nationality.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
+                            ? AppColors.textSecondary
+                            : AppColors.textPrimary
+                        )
+                        .lineLimit(1)
+                    Spacer(minLength: 0)
+                    Image(systemName: "chevron.down")
+                        .font(.system(size: 14, weight: .semibold))
+                        .foregroundColor(AppColors.textSecondary)
+                }
+                .padding(12)
+                .background(Color.white.opacity(0.08))
+                .clipShape(RoundedRectangle(cornerRadius: 8))
+            }
+            .accessibilityIdentifier("nationalityField")
         }
     }
 
