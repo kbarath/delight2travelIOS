@@ -14,7 +14,7 @@ struct LabeledTextField: View {
                 .foregroundColor(AppColors.textSecondary)
             TextField(placeholder, text: $text)
                 .textFieldStyle(.plain)
-                .onChange(of: text) { newValue in
+                .onChange(of: text) { _, newValue in
                     if let maxLength, newValue.count > maxLength {
                         text = String(newValue.prefix(maxLength))
                     }
