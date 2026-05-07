@@ -5,6 +5,9 @@ private let MAX_FIELD_WIDTH = 20
 struct TripInputView: View {
     @ObservedObject var viewModel: TripInputViewModel
     
+    @State private var nationalitySearchText: String = ""
+    @FocusState private var isNationalityFieldFocused: Bool
+    
     private let nationalityOptions: [String] = [
         "Afghanistan",
         "Albania",
@@ -200,6 +203,18 @@ struct TripInputView: View {
         "Zambia",
         "Zimbabwe"
     ]
+    
+    private var filteredNationalityOptions: [String] {
+        let query = nationalitySearchText.trimmingCharacters(in: .whitespacesAndNewlines)
+        guard !query.isEmpty else { return nationalityOptions }
+        return nationalityOptions.filter { $0.localizedCaseInsensitiveContains(query) }
+    }
+    
+    private var shouldShowNationalityAutocomplete: Bool {
+        isNationalityFieldFocused
+        && !filteredNationalityOptions.isEmpty
+        && filteredNationalityOptions.first != nationalitySearchText.trimmingCharacters(in: .whitespacesAndNewlines)
+    }
 
     var body: some View {
         ScrollView {
@@ -238,7 +253,7 @@ struct TripInputView: View {
         CardView {
             VStack(alignment: .leading, spacing: 20) {
                 nationalityDropdown
-                    .frame(maxWidth: 280, alignment: .leading)
+                    .frame(maxWidth: 330, alignment: .leading)
                 LabeledTextField(
                     label: "Origin",
                     text: $viewModel.origin,
@@ -246,7 +261,7 @@ struct TripInputView: View {
                     accessibilityId: "originCityField",
                     maxLength: MAX_FIELD_WIDTH
                 )
-                .frame(maxWidth: 280, alignment: .leading)
+                .frame(maxWidth: 330, alignment: .leading)
 
                 layoversSection
 
@@ -257,7 +272,7 @@ struct TripInputView: View {
                     accessibilityId: "destinationCityField",
                     maxLength: MAX_FIELD_WIDTH
                 )
-                .frame(maxWidth: 280, alignment: .leading)
+                .frame(maxWidth: 330, alignment: .leading)
 
 
 
@@ -272,29 +287,65 @@ struct TripInputView: View {
                 .font(AppTypography.label())
                 .foregroundColor(AppColors.textSecondary)
             
-            Menu {
-                ForEach(nationalityOptions, id: \.self) { option in
-                    Button(option) { viewModel.nationality = option }
-                }
-            } label: {
-                HStack(spacing: 10) {
-                    Text(viewModel.nationality.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty ? "Select nationality" : viewModel.nationality)
-                        .foregroundColor(
-                            viewModel.nationality.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty
-                            ? AppColors.textSecondary
-                            : AppColors.textPrimary
-                        )
-                        .lineLimit(1)
-                    Spacer(minLength: 0)
-                    Image(systemName: "chevron.down")
-                        .font(.system(size: 14, weight: .semibold))
-                        .foregroundColor(AppColors.textSecondary)
-                }
+            VStack(alignment: .leading, spacing: 8) {
+                TextField(
+                    "Select nationality",
+                    text: $nationalitySearchText
+                )
+                .focused($isNationalityFieldFocused)
+                .textInputAutocapitalization(.words)
+                .autocorrectionDisabled(true)
+                .textFieldStyle(.plain)
                 .padding(12)
                 .background(Color.white.opacity(0.08))
+                .foregroundColor(AppColors.textPrimary)
                 .clipShape(RoundedRectangle(cornerRadius: 8))
+                .accessibilityIdentifier("nationalityField")
+                .onAppear {
+                    if nationalitySearchText.trimmingCharacters(in: .whitespacesAndNewlines).isEmpty {
+                        nationalitySearchText = viewModel.nationality
+                    }
+                }
+                .onChange(of: nationalitySearchText) { _, newValue in
+                    viewModel.nationality = newValue
+                }
+                
+                if shouldShowNationalityAutocomplete {
+                    ScrollView {
+                        VStack(alignment: .leading, spacing: 0) {
+                            ForEach(filteredNationalityOptions.prefix(12), id: \.self) { option in
+                                Button {
+                                    viewModel.nationality = option
+                                    nationalitySearchText = option
+                                    isNationalityFieldFocused = false
+                                } label: {
+                                    HStack {
+                                        Text(option)
+                                            .foregroundColor(AppColors.textPrimary)
+                                            .lineLimit(1)
+                                        Spacer(minLength: 0)
+                                    }
+                                    .padding(.horizontal, 12)
+                                    .padding(.vertical, 10)
+                                }
+                                .accessibilityIdentifier("nationalityOption_\(option)")
+                                
+                                if option != filteredNationalityOptions.prefix(12).last {
+                                    Divider()
+                                        .overlay(Color.white.opacity(0.08))
+                                }
+                            }
+                        }
+                    }
+                    .frame(maxHeight: 240)
+                    .background(Color.black.opacity(0.25))
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .strokeBorder(Color.white.opacity(0.08), lineWidth: 1)
+                    )
+                }
             }
-            .accessibilityIdentifier("nationalityField")
         }
     }
 
