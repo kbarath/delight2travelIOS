@@ -1,7 +1,5 @@
 import SwiftUI
 
-private let MAX_FIELD_WIDTH = 20
-
 struct TripInputView: View {
     @ObservedObject var viewModel: TripInputViewModel
     
@@ -254,23 +252,21 @@ struct TripInputView: View {
             VStack(alignment: .leading, spacing: 20) {
                 nationalityDropdown
                     .frame(maxWidth: 330, alignment: .leading)
-                LabeledTextField(
+                AirportSearchField(
                     label: "Origin",
                     text: $viewModel.origin,
-                    placeholder: "e.g. San Francisco",
-                    accessibilityId: "originCityField",
-                    maxLength: MAX_FIELD_WIDTH
+                    placeholder: "e.g. SFO or San Francisco",
+                    accessibilityId: "originCityField"
                 )
                 .frame(maxWidth: 330, alignment: .leading)
 
                 layoversSection
 
-                LabeledTextField(
+                AirportSearchField(
                     label: "Destination",
                     text: $viewModel.destination,
-                    placeholder: "e.g. London",
-                    accessibilityId: "destinationCityField",
-                    maxLength: MAX_FIELD_WIDTH
+                    placeholder: "e.g. LHR or London",
+                    accessibilityId: "destinationCityField"
                 )
                 .frame(maxWidth: 330, alignment: .leading)
 
@@ -352,7 +348,7 @@ struct TripInputView: View {
     private var layoversSection: some View {
         VStack(alignment: .leading, spacing: 10) {
             HStack {
-                Text("LAYOVER CITIES (OPTIONAL)")
+                Text("LAYOVER AIRPORTS (OPTIONAL)")
                     .font(AppTypography.label())
                     .foregroundColor(AppColors.textSecondary)
                 Spacer()
@@ -374,24 +370,14 @@ struct TripInputView: View {
             }
 
             ForEach(Array(viewModel.layovers.enumerated()), id: \.offset) { index, _ in
-                HStack(spacing: 8) {
-                    TextField("City name", text: Binding(
-                        get: { viewModel.layovers.indices.contains(index) ? viewModel.layovers[index] : "" },
-                        set: { new in
-                            var copy = viewModel.layovers
-                            if copy.indices.contains(index) {
-                                copy[index] = String(new.prefix(MAX_FIELD_WIDTH))
-                                viewModel.layovers = copy
-                            }
-                        }
-                    ))
-                    .textFieldStyle(.plain)
-                    .padding(12)
-                    .background(Color.white.opacity(0.08))
-                    .foregroundColor(AppColors.textPrimary)
-                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                HStack(alignment: .top, spacing: 8) {
+                    AirportSearchField(
+                        text: layoverBinding(at: index),
+                        placeholder: "e.g. DXB or Dubai",
+                        accessibilityId: "layoverField_\(index)",
+                        showsLabel: false
+                    )
                     .frame(maxWidth: 280, alignment: .leading)
-                    .accessibilityIdentifier("layoverField_\(index)")
 
                     Button {
                         viewModel.removeLayover(at: index)
@@ -400,10 +386,24 @@ struct TripInputView: View {
                             .font(.system(size: 22))
                             .foregroundColor(AppColors.textSecondary)
                     }
+                    .padding(.top, 10)
                     .accessibilityIdentifier("removeLayover_\(index)")
                 }
             }
         }
+    }
+
+    private func layoverBinding(at index: Int) -> Binding<String> {
+        Binding(
+            get: { viewModel.layovers.indices.contains(index) ? viewModel.layovers[index] : "" },
+            set: { new in
+                var copy = viewModel.layovers
+                if copy.indices.contains(index) {
+                    copy[index] = new
+                    viewModel.layovers = copy
+                }
+            }
+        )
     }
 
     private var goButton: some View {
