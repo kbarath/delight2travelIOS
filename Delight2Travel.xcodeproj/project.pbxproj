@@ -31,6 +31,11 @@
 		B1010033 /* TripRequestTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020033 /* TripRequestTests.swift */; };
 		B1010034 /* TravelDocumentsResponseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020034 /* TravelDocumentsResponseTests.swift */; };
 		B1010035 /* MockTravelDocumentsAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020035 /* MockTravelDocumentsAPI.swift */; };
+		B1010036 /* Airport.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020036 /* Airport.swift */; };
+		B1010037 /* AirportDatabase.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020037 /* AirportDatabase.swift */; };
+		B1010038 /* AirportSearchField.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020038 /* AirportSearchField.swift */; };
+		B1010039 /* airports.json in Resources */ = {isa = PBXBuildFile; fileRef = B1020039 /* airports.json */; };
+		B1010040 /* AirportDatabaseTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020040 /* AirportDatabaseTests.swift */; };
 		B1010041 /* Delight2TravelUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = B1020041 /* Delight2TravelUITests.swift */; };
 /* End PBXBuildFile section */
 
@@ -91,6 +96,11 @@
 		B1020033 /* TripRequestTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TripRequestTests.swift; sourceTree = "<group>"; };
 		B1020034 /* TravelDocumentsResponseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TravelDocumentsResponseTests.swift; sourceTree = "<group>"; };
 		B1020035 /* MockTravelDocumentsAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MockTravelDocumentsAPI.swift; sourceTree = "<group>"; };
+		B1020036 /* Airport.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Airport.swift; sourceTree = "<group>"; };
+		B1020037 /* AirportDatabase.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDatabase.swift; sourceTree = "<group>"; };
+		B1020038 /* AirportSearchField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportSearchField.swift; sourceTree = "<group>"; };
+		B1020039 /* airports.json */ = {isa = PBXFileReference; lastKnownFileType = text.json; path = airports.json; sourceTree = "<group>"; };
+		B1020040 /* AirportDatabaseTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AirportDatabaseTests.swift; sourceTree = "<group>"; };
 		B1020041 /* Delight2TravelUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Delight2TravelUITests.swift; sourceTree = "<group>"; };
 		B1030001 /* Delight2Travel.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = Delight2Travel.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		B1030002 /* Delight2TravelUnitTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = Delight2TravelUnitTests.xctest; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -175,6 +185,7 @@
 			isa = PBXGroup;
 			children = (
 				B1020015 /* LabeledTextField.swift */,
+				B1020038 /* AirportSearchField.swift */,
 			);
 			path = Components;
 			sourceTree = "<group>";
@@ -214,6 +225,8 @@
 			children = (
 				B1020003 /* TripRequest.swift */,
 				B1020004 /* TravelDocumentsResponse.swift */,
+				B1020036 /* Airport.swift */,
+				B1020037 /* AirportDatabase.swift */,
 			);
 			path = Models;
 			sourceTree = "<group>";
@@ -243,6 +256,7 @@
 			children = (
 				B1020020 /* Assets.xcassets */,
 				B1020021 /* Info.plist */,
+				B1020039 /* airports.json */,
 			);
 			path = Resources;
 			sourceTree = "<group>";
@@ -255,6 +269,7 @@
 				B1020033 /* TripRequestTests.swift */,
 				B1020034 /* TravelDocumentsResponseTests.swift */,
 				B1020035 /* MockTravelDocumentsAPI.swift */,
+				B1020040 /* AirportDatabaseTests.swift */,
 			);
 			path = Delight2TravelUnitTests;
 			sourceTree = "<group>";
@@ -375,6 +390,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				B1010020 /* Assets.xcassets in Resources */,
+				B1010039 /* airports.json in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -417,6 +433,9 @@
 				B1010016 /* TripInputView.swift in Sources */,
 				B1010017 /* ResultsViewModel.swift in Sources */,
 				B1010018 /* DocumentsResultsView.swift in Sources */,
+				B1010036 /* Airport.swift in Sources */,
+				B1010037 /* AirportDatabase.swift in Sources */,
+				B1010038 /* AirportSearchField.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -429,6 +448,7 @@
 				B1010033 /* TripRequestTests.swift in Sources */,
 				B1010034 /* TravelDocumentsResponseTests.swift in Sources */,
 				B1010035 /* MockTravelDocumentsAPI.swift in Sources */,
+				B1010040 /* AirportDatabaseTests.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
